@@ -1,9 +1,10 @@
-# Week 0
+# Week 5
 
-This week is meant to give you a very basic introduction to ... In particular, we will focus on the following:
+This week's lab is meant to introduce you data visualization and Plotly. In particular, we'll cover the following:
 
-- XXX
-- XXX
+- Visualization techniques and theory
+- Interactive Visualization
+- Using Plotly Express
 
 ## Setup
 
@@ -16,12 +17,15 @@ This week is meant to give you a very basic introduction to ... In particular, w
 The environment for this week is built with the following environment.yml:
 
 ```yml
-name: coding-exercise
+name: week-5
 dependencies:
   - python=3.11
   - pip
   - pip:
+    - ipykernel  # for Jupyter Notebook
+    - plotly
     - streamlit
+    - seaborn
     - pandas
     - numpy
 ```

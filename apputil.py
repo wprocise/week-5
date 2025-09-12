@@ -1,9 +1,5 @@
-import numpy as np
+import plotly.express as px
+import pandas as pd
 
 
 # update/add code below ...
-def ways(n):
-    if n == 12:
-        return 3
-    elif n == 20:
-        return 5
