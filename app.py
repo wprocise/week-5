@@ -12,8 +12,8 @@ st.write(
 '''
 )
 # Generate and display the figure
-fig = exercise1_visualize()
-st.plotly_chart(fig, use_container_width=True)
+fig1 = visualize_exercise1()
+st.plotly_chart(fig1, use_container_width=True)
 
 st.write(
 '''
@@ -21,14 +21,14 @@ st.write(
 '''
 )
 # Generate and display the figure
-fig2 = exercise2_visualize()
-st.plotly_chart(fig, use_container_width=True)
+fig2 = visualize_exercise2()
+st.plotly_chart(fig2, use_container_width=True)
 
 st.write(
 '''
-# Titanic Visualization 3
+# Titanic Visualization Bonus
 '''
 )
 # Generate and display the figure
-fig2 = exercise3_visualize()
-st.plotly_chart(fig, use_container_width=True)
+fig3 = visualize_exercise2_bonus()
+st.plotly_chart(fig3, use_container_width=True)
