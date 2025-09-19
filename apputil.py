@@ -1,62 +1,76 @@
 import plotly.express as px
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv')
-
-
-import pandas as pd
-
-def survival_stats(df: pd.DataFrame) -> pd.DataFrame:
+def exercise1():
     """
-    Returns survival statistics grouped by Age, Pclass, and Sex.
-    Demonstrates Week 3 (groupby, agg, sorting) and Week 4 (categorical binning).
+    Returns a DataFrame with survival counts and survival rates
+    grouped by passenger class and sex.
     """
-
-    # --- Week 4: use pd.cut to group ages into categories ---
-    bins = [-1, 12, 19, 59, 150]  
-    labels = ["Child", "Teen", "Adult", "Senior"]
-    df = df.copy()
-    df["AgeGroup"] = pd.cut(df["Age"], bins=bins, labels=labels)
-
-    # --- Week 3: groupby + agg for totals and survival counts ---
+    # Load the Titanic dataset from the given URL
+    df = pd.read_csv("https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv")
+    # Group the data by passenger class and sex, and focus on the Survived column
     grouped = (
-        df.groupby(["Pclass", "Sex", "AgeGroup"])["Survived"]
-          .agg(Total="count", Survived="sum")
+        df.groupby(["Pclass", "Sex"])["Survived"]
+          # Count the total passengers and sum the survivors
+          .agg(["count", "sum"]) 
+          # Reset the index so Pclass and Sex are columns
+          .reset_index()
+          # Rename the columns to Total and Survived
+          .rename(columns={"count": "Total", "sum": "Survived"})
+    )
+    # Calculate the survival rate for each group
+    grouped["SurvivalRate"] = grouped["Survived"] / grouped["Total"]
+    # Return the final table
+    return grouped
+def exercise1_visualize():
+    return 
+
+def exercise2():
+    """
+    Returns a DataFrame with survival counts and survival rates
+    grouped by passenger class and sex.
+    """
+    # Load the Titanic dataset from the given URL
+    df = pd.read_csv("https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv")
+    # Group the data by passenger class and sex, and focus on the Survived column
+    grouped = (
+        df.groupby(["Pclass", "Sex"])["Survived"]
+          # Count the total passengers and sum the survivors
+          .agg(["count", "sum"]) 
+          # Reset the index so Pclass and Sex are columns
+          .reset_index()
+          # Rename the columns to Total and Survived
+          .rename(columns={"count": "Total", "sum": "Survived"})
+    )
+    # Calculate the survival rate for each group
+    grouped["SurvivalRate"] = grouped["Survived"] / grouped["Total"]
+    # Return the final table
+    return grouped
+def exercise2_visualize():
+    return 
+
+def exercise3():
+    """
+    Analyzes the relationship between family size, passenger class, and ticket fare.
+    Returns a table with total passengers, average, minimum, and maximum fares.
+    """
+    # Load dataset
+    df = pd.read_csv(
+        "https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv"
+    )
+    df["FamilySize"] = df["SibSp"] + df["Parch"] + 1
+    # Group by class and family size
+    grouped = (
+        df.groupby(["Pclass", "FamilySize"])["Fare"]
+          .agg(TotalPassengers="count",
+               AvgFare="mean",
+               MinFare="min",
+               MaxFare="max")
           .reset_index()
     )
-
-    # --- Week 3: create new column for rate ---
-    grouped["SurvivalRate"] = grouped["Survived"] / grouped["Total"]
-
-    # --- Week 3: sort values for readability ---
-    grouped = grouped.sort_values(by="Pclass")
+    # Sort for readability
+    grouped = grouped.sort_values(by=["Pclass", "FamilySize"]).reset_index(drop=True)
 
     return grouped
-
-def plot_survival_by_age_class_gender():
-    """
-    Creates a Plotly bar chart showing survival rate by AgeGroup, Sex, and Pclass.
-    """
-    data = survival_stats(df)
-
-    fig = px.bar(
-        data,
-        x="AgeGroup",
-        y="SurvivalRate",
-        color="Sex",
-        barmode="group",
-        facet_col="Pclass",
-        template="plotly_white",
-        text="SurvivalRate"  # add numbers on bars
-    )
-
-    # --- Make it look nice ---
-    fig.update_layout(
-        title="Titanic Survival Rates by Age Group, Class, and Gender",
-        yaxis=dict(title="Survival Rate", tickformat=".0%"),
-    )
-
-    return fig
-print(survival_stats(df))
-print("---------------")
-print(df)
+def exercise3_visualize():
+    return
