@@ -10,12 +10,16 @@ st.write(
 ...
 ''')
 
-# currently set for integer input
-amount = st.number_input("Exercise Input: ", 
-                         value=None, 
-                         step=1, 
-                         format="%d")
+st.write(
+'''
+# Week 5: Titanic Survival Visualization
 
-if amount is not None:
-    st.write(f"The exercise input was {amount}.")
+Explore survival rates by class and gender.
+'''
+)
 
+# Load Titanic dataset
+
+# Generate and display the figure
+fig = plot_survival_by_age_class_gender()
+st.plotly_chart(fig, use_container_width=True)
