@@ -2,9 +2,9 @@
 
 This week's lab is meant to introduce you data visualization and Plotly. In particular, we'll cover the following:
 
-- Visualization techniques and theory
+- Visualization techniques
 - Interactive Visualization
-- Using Plotly Express
+- Using Plotly Express with pandas
 
 ## Setup
 
