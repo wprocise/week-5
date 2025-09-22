@@ -12,7 +12,7 @@ st.write(
 '''
 )
 # Generate and display the figure
-fig1 = visualize_exercise1()
+fig1 = visualize_demographic()
 st.plotly_chart(fig1, use_container_width=True)
 
 st.write(
@@ -21,7 +21,7 @@ st.write(
 '''
 )
 # Generate and display the figure
-fig2 = visualize_exercise2()
+fig2 = visualize_families()
 st.plotly_chart(fig2, use_container_width=True)
 
 st.write(
@@ -30,5 +30,5 @@ st.write(
 '''
 )
 # Generate and display the figure
-fig3 = visualize_exercise2_bonus()
+fig3 = visualize_family_size()
 st.plotly_chart(fig3, use_container_width=True)
