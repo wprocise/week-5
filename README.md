@@ -24,6 +24,7 @@ dependencies:
   - pip:
     - ipykernel  # for Jupyter Notebook
     - plotly
+    - nbformat
     - streamlit
     - seaborn
     - pandas
