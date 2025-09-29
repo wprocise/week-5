@@ -9,5 +9,27 @@ import seaborn as sns
 
 # Load the Titanic dataset
 df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv')
+"""
+    Analyzing survival patterns based on passenger demographics
+
+    demographic categories: class, sex, age group
+
+    Returns: Table with results of all combinations of demographic categories
+    """
 
 # 1) Create a new column in the Titanic dataset that classifies passengers into age categories: 'Child' (0-12), 'Teen' (13-19), 'Adult' (20-59), and 'Senior' (60+)
+"""
+    Defining age categories using pd.cut
+    Using pd.cut to cut the 'age column into bins and creating a new column 'Age_group' by adding labels to the bins
+
+    age bins = [0, 12, 19, 59, np.inf]
+    labels = ['Child', 'Teen', 'Adult', 'Senior']
+    """
+df['Age_group'] = pd.cut(df['Age'], bins=[0, 12, 19, 59, np.inf], labels=['Child', 'Teen', 'Adult', 'Senior'])
+
+# 2) Group the passengers by class, sex, and age group
+# group
+grouped = df.groupby(['Pclass', 'Sex', 'Age_group'])
+
+
+
