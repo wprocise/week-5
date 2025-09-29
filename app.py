@@ -1,5 +1,4 @@
 import streamlit as st
-
 from apputil import *
 
 # Load Titanic dataset
