@@ -16,38 +16,41 @@ df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/mai
 
     Returns: Table with results of all combinations of demographic categories
 """
+def survival_demographics(df):
+    # 1) Create a new column in the Titanic dataset that classifies passengers into age categories: 'Child' (0-12), 'Teen' (13-19), 'Adult' (20-59), and 'Senior' (60+)
+    """
+        Defining age categories using pd.cut
+        Using pd.cut to cut the 'age column into bins and creating a new column 'Age_group' by adding labels to the bins
 
-# 1) Create a new column in the Titanic dataset that classifies passengers into age categories: 'Child' (0-12), 'Teen' (13-19), 'Adult' (20-59), and 'Senior' (60+)
-"""
-    Defining age categories using pd.cut
-    Using pd.cut to cut the 'age column into bins and creating a new column 'Age_group' by adding labels to the bins
+        age bins = [0, 12, 19, 59, np.inf]
+        labels = ['Child', 'Teen', 'Adult', 'Senior']
+    """
+    df['Age_group'] = pd.cut(df['Age'], bins=[0, 12, 19, 59, np.inf], labels=['Child', 'Teen', 'Adult', 'Senior'])
 
-    age bins = [0, 12, 19, 59, np.inf]
-    labels = ['Child', 'Teen', 'Adult', 'Senior']
-"""
-df['Age_group'] = pd.cut(df['Age'], bins=[0, 12, 19, 59, np.inf], labels=['Child', 'Teen', 'Adult', 'Senior'])
+    # 2) Group the passengers by class, sex, and age group
+    """
+        Use groupby to group the passengers
+    """
+    grouped = df.groupby(['Pclass', 'Sex', 'Age_group'])
 
-# 2) Group the passengers by class, sex, and age group
-"""
-    Use groupby to group the passengers
-"""
-grouped = df.groupby(['Pclass', 'Sex', 'Age_group'])
+    # 3) For each group, calculate the total number of passengers, survivors, and survival rate
+    """Use agg to aggregate the grouped data
+        Calculating total passengers(n_passengers), survivors(n_survivors), and survival rate(survival_rate)
+    """
+    summary = grouped.agg(
+        n_passengers=('Survived', 'count'),
+        n_survivors=('Survived', 'sum')
+    ).reset_index()
+    summary['survival_rate'] = summary['n_survivors'] / summary['n_passengers']
 
-# 3) For each group, calculate the total number of passengers, survivors, and survival rate
-"""Use agg to aggregate the grouped data
-    Calculating total passengers(n_passengers), survivors(n_survivors), and survival rate(survival_rate)
-"""
-summary = grouped.agg(
-    n_passengers=('Survived', 'count'),
-    n_survivors=('Survived', 'sum')
-).reset_index()
-summary['survival_rate'] = summary['n_survivors'] / summary['n_passengers']
+    # 4) Return a table that includes the results of all combinations of class, sex, and age_group
+    """
+        Displaying a summary table with all combinations
+    """
+    return summary
 
-# 4) Return a table that includes the results of all combinations of class, sex, and age_group
-"""
-    Displaying a summary table with all combinations
-"""
-print(summary)
+df_summary = survival_demographics(df)
+print(df_summary)
 
 # 5) Order the results so that they are easy to interpret
 """
@@ -59,6 +62,8 @@ summary = summary.sort_values(by=['Pclass']).reset_index(drop=True)
 print(summary)
 summary = summary.sort_values(by=['Sex']).reset_index(drop=True)
 print(summary)
+
+
 
 
 
