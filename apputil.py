@@ -43,7 +43,22 @@ summary = grouped.agg(
 ).reset_index()
 summary['survival_rate'] = summary['n_survivors'] / summary['n_passengers']
 
+# 4) Return a table that includes the results of all combinations of class, sex, and age_group
+"""
+    Displaying a summary table with all combinations
+"""
+print(summary)
 
+# 5) Order the results so that they are easy to interpret
+"""
+    Sorting the summary by each demographic category
+"""
+summary = summary.sort_values(by=['Age_group']).reset_index(drop=True)
+print(summary)
+summary = summary.sort_values(by=['Pclass']).reset_index(drop=True)
+print(summary)
+summary = summary.sort_values(by=['Sex']).reset_index(drop=True)
+print(summary)
 
 
 
