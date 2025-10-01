@@ -4,7 +4,9 @@ from apputil import *
 # Load Titanic dataset
 df = pd.read_csv('https://raw.githubusercontent.com/leontoddjohnson/datasets/main/data/titanic.csv')
 
-st.write(
+# 6) Write a clear questions about the results from the table from the dataset
+st.write("How did survival rates vary among different age groups on the Titanic?"
+         
 '''
 # Titanic Visualization 1
 
