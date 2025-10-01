@@ -105,10 +105,20 @@ def family_groups(df):
     # 3) Return a table with the above results and sort the values so that they are easy to read and interpret
     """
         Displaying a summary table with all combinations
+        Sort values by 'Pclass' and 'Family_group'
     """
     df_summary = df_family_groups(df.copy())
     print(df_summary)
+    summary = df_summary.sort_values(by=['Pclass', 'Family_group']).reset_index(drop=True)
+    print(summary)
     
+    # 4) Reference app_family.py file for question and streamlit plotting
+    """
+        The app_family.py file contains the streamlit code to visualize the family size and wealth patterns using a bar chart
+        The bar chart displays average ticket fare across family size categories and passenger class
+    """
+
+
 
 
 
