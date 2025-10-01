@@ -26,14 +26,24 @@ def visualize_demographic():
 fig1 = visualize_demographic()
 st.plotly_chart(fig1, use_container_width=True)
 
-st.write(
+st.write("What are the most common last names among Titanic families, and how many families share each last name?"
 '''
 # Titanic Visualization 2
 '''
 )
 # Generate and display the figure
-fig2 = visualize_families()
-st.plotly_chart(fig2, use_container_width=True)
+# 4) Write a function called `last_names()` that extracts the last name of each passenger from the `Name` column, and returns the count for each last name (i.e., a pandas series with last name as index, and count as value). Does this result agree with that of the data table above? Share your findings in your app using `st.write`.
+def last_names(df):
+"""
+    Extracting last names from the 'Name' column
+    Using str.split to split the 'Name' column and extract the last name
+    Using value_counts to count the occurrences of each last name
+"""
+    df['Last_Name'] = df['Name'].str.split(',').str[0]
+    last_name_counts = df['Last_Name'].value_counts()
+    return last_name_counts
+	fig2 = visualize_families()
+	st.plotly_chart(fig2, use_container_width=True)
 
 st.write(
 '''
