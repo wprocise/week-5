@@ -49,25 +49,25 @@ def survival_demographics(df):
     """
     return summary
 
-df_summary = survival_demographics(df)
-print(df_summary)
+    df_summary = survival_demographics(df)
+    print(df_summary)
 
-# 5) Order the results so that they are easy to interpret
-"""
-    Sorting the summary by each demographic category
-"""
-summary = summary.sort_values(by=['Age_group']).reset_index(drop=True)
-print(summary)
-summary = summary.sort_values(by=['Pclass']).reset_index(drop=True)
-print(summary)
-summary = summary.sort_values(by=['Sex']).reset_index(drop=True)
-print(summary)
+    # 5) Order the results so that they are easy to interpret
+    """
+        Sorting the summary by each demographic category
+    """
+    summary = summary.sort_values(by=['Age_group']).reset_index(drop=True)
+    print(summary)
+    summary = summary.sort_values(by=['Pclass']).reset_index(drop=True)
+    print(summary)
+    summary = summary.sort_values(by=['Sex']).reset_index(drop=True)
+    print(summary)
 
-# 6/7) Reference app.py file for question and streamlit plotting
-"""
-    The app.py file contains the streamlit code to visualize the survival patterns using a bar chart
-    The bar chart displays survival rates across demographic categories 'Age_group' and 'Sex'
-"""
+    # 6/7) Reference app.py file for question and streamlit plotting
+    """
+        The app.py file contains the streamlit code to visualize the survival patterns using a bar chart
+        The bar chart displays survival rates across demographic categories 'Age_group' and 'Sex'
+    """
 
 ## EXERCISE 2: FAMILY SIZE AND WEALTH
 
@@ -100,8 +100,16 @@ def family_groups(df):
         max_fare=('Fare', 'max')
     ).reset_index()
     return summary
-df_family_summary = family_groups(df.copy())
-print(df_family_summary)
+    df_family_summary = family_groups(df.copy())
+    print(df_family_summary)
+    # 3) Return a table with the above results and sort the values so that they are easy to read and interpret
+    """
+        Displaying a summary table with all combinations
+    """
+    df_summary = df_family_groups(df.copy())
+    print(df_summary)
+    
+
 
 
 
