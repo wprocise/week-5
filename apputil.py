@@ -63,6 +63,46 @@ print(summary)
 summary = summary.sort_values(by=['Sex']).reset_index(drop=True)
 print(summary)
 
+# 6/7) Reference app.py file for question and streamlit plotting
+"""
+    The app.py file contains the streamlit code to visualize the survival patterns using a bar chart
+    The bar chart displays survival rates across demographic categories 'Age_group' and 'Sex'
+"""
+
+## EXERCISE 2: FAMILY SIZE AND WEALTH
+
+def family_groups(df):
+
+    # 1) Create a new column in the Titanic dataset that classifies passengers into family size categories: 'Solo' (1), 'Small Family' (2-4), and 'Large Family' (5+)
+    """
+        Defining family size categories using pd.cut
+        Using pd.cut to cut the 'family_size' column into bins and creating a new column 'family_group' by adding labels to the bins
+
+        family size bins = [0, 1, 4, np.inf]
+        labels = ['Solo', 'Small Family', 'Large Family']
+    """
+    df['Family_size'] = df['SibSp'] + df['Parch'] + 1  # Including the passenger themselves
+    df['Family_group'] = pd.cut(df['Family_size'], bins=[0, 1, 4, np.inf], labels=['Solo', 'Small Family', 'Large Family'])
+
+    # 2) Group the passengers by family size and passenger class
+    """
+        Use groupby to group the passengers
+    """
+    grouped = df.groupby(['Family_group', 'Pclass'])
+    """
+        For each group, calculate the total number of passengers(n_passengers), average ticket fare(avg_fare),
+        and minimum and maximum ticket fares(min_fare, max_fare)
+    """
+    summary = grouped.agg(
+        n_passengers=('PassengerId', 'count'),
+        avg_fare=('Fare', 'mean'),
+        min_fare=('Fare', 'min'),
+        max_fare=('Fare', 'max')
+    ).reset_index()
+    return summary
+df_family_summary = family_groups(df.copy())
+print(df_family_summary)
+
 
 
 
